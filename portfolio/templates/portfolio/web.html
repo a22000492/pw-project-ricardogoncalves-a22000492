@@ -1,0 +1,36 @@
+{% extends 'portfolio/layout.html' %}
+
+{% block main %}
+  <section>
+    <h3>qUIZZ</h3>
+    <form method="POST" action="" enctype="multipart/form-data">
+      <fieldset>
+        <legend>
+          Quizz sobre wEB
+        </legend> 
+        <fieldset>
+          <legend>Info</legend>
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="ex: Ricardo Gonçalves" required>
+        </fieldset>
+        <fieldset>
+          <legend>Perguntas</legend>
+          <label for="css">O que são seletores CSS?</label>
+          <input type="text" id="css" name="css" required>
+
+          <label for="image-tag">Qual a tag html para carregar uma imagem?</label>
+          <input type="text" id="image-tag" name="image-tag" required>
+
+          <label for="media-tags">Quais as 5 tags que suportam conteúdo media em HTML5?</label>
+          <input type="text" id="media-tags" name="media-tags" required>
+        </fieldset>
+      </fieldset>
+      <input type="submit" value="Enviar" class="btn">
+    </form>
+
+    {% load static %}
+    <img src="{% static 'portfolio/images/pontuacoes.jpg' %}">
+    
+  </section>
+      
+{% endblock %}

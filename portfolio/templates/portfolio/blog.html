@@ -1,0 +1,18 @@
+{% extends 'portfolio/layout.html' %}
+
+{% block main %}
+  {% for post in posts %}
+    <p> 
+      {{ post.titulo }}
+      {{ post.descricao }}
+    </p>
+  {% endfor %}
+
+  <h3>Novo post</h3>
+  <form action="{% url 'portfolio:blog' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Gravar" class="btn btn-success" >
+  </form>
+      
+{% endblock %}

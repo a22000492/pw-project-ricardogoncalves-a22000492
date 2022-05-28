@@ -1,0 +1,11 @@
+<!-- home.html -->
+
+{% extends 'portfolio/layout.html' %}
+
+{% block main %}
+  <h3>Portfolio</h3>
+  <p>{{ data }}</p>
+
+  {% load static %}
+  <img src="{% static 'portfolio/images/space.jpg' %}">
+{% endblock %}
