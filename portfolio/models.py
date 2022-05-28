@@ -3,12 +3,15 @@ from django.core.validators import MinValueValidator
 
 # Create your models here.
 
+def posts_resolution_path(instance, filename):
+    return f'posts/{instance.id}/'
+
 class Post(models.Model):
   autor = models.CharField(max_length=100)
   titulo = models.CharField(max_length=200)
   descricao = models.CharField(max_length=500)
   link = models.CharField(max_length=200, blank=True)
-  imagem = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, blank=True)
+  imagem = models.ImageField(upload_to=posts_resolution_path)
   criado = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):

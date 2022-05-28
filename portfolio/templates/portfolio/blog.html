@@ -9,7 +9,7 @@
   {% endfor %}
 
   <h3>Novo post</h3>
-  <form action="{% url 'portfolio:blog' %}" method="POST">
+  <form action="{% url 'portfolio:blog' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Gravar" class="btn btn-success" >
