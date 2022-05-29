@@ -8,7 +8,11 @@
 .container {
   max-width: 1350px;
   margin: 0 auto;
-  padding: auto 2rem;
+  padding: 1rem 2rem;
+}
+
+h1 {
+  padding: 1rem 0;
 }
 
 header {
@@ -30,6 +34,10 @@ header a:hover {
   text-decoration: underline;
 }
 
+main {
+  min-height: 85vh;
+}
+
 footer {
   display: flex;
   padding: 1rem 0;
@@ -43,6 +51,12 @@ footer > div:first-child {
   display: flex;
   align-items: center;
   min-height: 500px;
+}
+
+.content.content-center {
+  padding: 2rem;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .text-box {
@@ -89,17 +103,139 @@ footer > div:first-child {
   background-size: cover;
 }
 
-.projetos {
+.projetos, .posts {
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
+  margin-top: 2rem;
 }
 
-.projetos div {
+.posts p {
+  padding-top: 0.5rem;
+}
+
+.post {
+  align-items: flex-start;
+}
+
+.post .author {
+  font-size: 12px;
+}
+
+.post .aditional-info {
+  display: flex;
+  width: 100%;
+  padding-top: 3rem;
+}
+
+.post .aditional-info > div {
+  flex: 1;
+}
+
+.posts-form {
+  width: 60%;
+  padding: 2rem 1rem;
+}
+
+.posts-form p {
+  padding-top: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.projetos div, .posts > div {
   display: flex;
   padding: 1rem;
   justify-content: center;
   flex-direction: column;
   border-radius: 5px;
   border: 1px solid black;
+}
+
+legend {
+  font-weight: bold;
+}
+
+fieldset {
+  padding: 0.5rem 1rem;
+}
+
+fieldset.space {
+  margin-top: 1rem;
+}
+
+.form-group {
+  padding-bottom: 1rem;
+}
+
+label {
+  display: block;
+  padding-bottom: 0.5rem;
+}
+
+select, input[type=text], input[type=url], textarea {
+  width: 100%;
+  padding: 5px 8px;
+}
+
+.btn-primary {
+  padding: 5px 10px;
+  appearance: none;
+  color: white;
+  background: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.btn-primary:hover {
+  color: black;
+  background: white;
+}
+
+.submit-group {
+  display: flex;
+  padding: 1rem 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-results {
+  padding: 2rem 0;
+}
+
+.form-results img {
+  max-width: 500px;
+}
+
+.contacts {
+  padding: 2rem 1rem;
+}
+
+@media only screen and (max-width: 790px) {
+  .projetos, .posts {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .posts-form {
+    width: 100%;
+  }
+
+  .text-image {
+    flex-direction: column;
+  }
+
+  .text-image .text-box {
+    padding-bottom: 2rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .projetos, .posts {
+    grid-template-columns: 1fr;
+  }
 }

@@ -3,19 +3,19 @@
 {% extends 'portfolio/layout.html' %}
 
 {% block main %}
-  <h3>Projetos</h3>
-  <div class="projetos">
-    <div>
-      <p>Rockstar</p>
-      <p>Algoritmia e Estrutura de Dados</p>
+  <section>
+    <div class="container content content-center">
+      <h1>Projetos</h1>
+      <div class="projetos">
+        {% for projeto in projetos %}
+          <div>
+            <h4>{{ projeto.nome }}</h4>
+            <p>{{ projeto.disciplina }}</p>
+            <p><strong>Ano letivo:</strong> {{ projeto.ano_letivo }}</p>
+            <p><strong>Tecnologias:</strong> {{ projeto.tecnologias }}</p>
+          </div>
+        {% endfor %}
+      </div>
     </div>
-    <div>
-      <p>Xadrez</p>
-      <p>Fundamentos da Programação</p>
-    </div>
-    <div>
-      <p>Jogo</p>
-      <p>Linguagens da Programação 2</p>
-    </div>
-  </div>
+  </section>
 {% endblock %}

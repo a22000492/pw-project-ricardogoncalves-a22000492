@@ -1,0 +1,33 @@
+<!-- formacao.html -->
+
+{% extends 'portfolio/layout.html' %}
+
+{% block main %}
+  <section>
+    <div class="container">
+      <h1>Licenciatura em Engenharia Informática</h1>
+      <div class="posts">
+        {% for cadeira in cadeiras %}
+          <div class="post">
+            <h4>{{ cadeira.nome }}</h4>
+            <p>{{ cadeira.descricao }}</p>
+            <p><strong>Ano:</strong> {{ cadeira.ano }}</p>
+            {% if cadeira.linguagens %}
+              <p><strong>Linguagens:</strong>
+                {% for linguagem in cadeira.linguagens.all %}
+                  {{ linguagem.nome }}
+                {% endfor %}
+              </p>
+            {% endif %}
+            <p><strong>Professor Teóricas:</strong> {{ cadeira.docente_teorica }}</p>
+            <p><strong>Professores de Práticas:</strong> 
+              {% for docente in cadeira.docentes_praticas.all %}
+                  {{ docente.nome }}
+                {% endfor %}
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

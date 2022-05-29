@@ -2,34 +2,60 @@
 
 {% block main %}
   <section>
-    <h3>qUIZZ</h3>
-    <form method="POST" action="" enctype="multipart/form-data">
-      <fieldset>
-        <legend>
-          Quizz sobre wEB
-        </legend> 
+    <div class="container content content-center">
+      <h1>Quizz sobre Programação Web</h1>
+      <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
         <fieldset>
-          <legend>Info</legend>
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" name="nome" placeholder="ex: Ricardo Gonçalves" required>
+          <legend>
+            Quizz sobre Web
+          </legend> 
+          <fieldset>
+            <legend>Info</legend>
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder="ex: Ricardo Gonçalves" required>
+            </div>
+          </fieldset>
+          <fieldset class="space">
+            <legend>Perguntas</legend>
+            <div class="form-group">
+              <label for="html">O que significa HTML?</label>
+              <select name="html" id="html">
+                <option value="html1">Hypertext Markup Language</option>
+                <option value="html2">Hypertext Markup Label</option>
+                <option value="html3">Hyper Markup Language</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="image-tag">Qual a tag html para carregar uma imagem?</label>
+              <select name="image-tag" id="image-tag">
+                <option value="image-tag1">image</option>
+                <option value="image-tag2">im</option>
+                <option value="image-tag3">img</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="python">Que extensão devem ter os ficheiros em Pyhton?</label>
+              <select name="python" id="python">
+                <option value="python1">p</option>
+                <option value="python2">py</option>
+                <option value="python3">pt</option>
+              </select>
+            </div>
+          </fieldset>
+          <div class="submit-group">
+            <input type="submit" value="Enviar" class="btn btn-primary">
+          </div>
         </fieldset>
-        <fieldset>
-          <legend>Perguntas</legend>
-          <label for="css">O que são seletores CSS?</label>
-          <input type="text" id="css" name="css" required>
-
-          <label for="image-tag">Qual a tag html para carregar uma imagem?</label>
-          <input type="text" id="image-tag" name="image-tag" required>
-
-          <label for="media-tags">Quais as 5 tags que suportam conteúdo media em HTML5?</label>
-          <input type="text" id="media-tags" name="media-tags" required>
-        </fieldset>
-      </fieldset>
-      <input type="submit" value="Enviar" class="btn">
-    </form>
-
-    {% load static %}
-    <img src="{% static 'portfolio/images/pontuacoes.jpg' %}">
+      </form>
+      <div class="form-results">
+        {% load static %}
+        <img src="{% static 'portfolio/images/pontuacoes.png' %}">
+      </div>
+    </div>
     
   </section>
       

@@ -1,17 +1,15 @@
 from django.db import models
 from django.core.validators import MinValueValidator 
 
-# Create your models here.
-
 def posts_resolution_path(instance, filename):
-    return f'posts/{instance.id}/'
+    return 'images/{0}/'.format(filename)
 
 class Post(models.Model):
   autor = models.CharField(max_length=100)
   titulo = models.CharField(max_length=200)
   descricao = models.CharField(max_length=500)
   link = models.CharField(max_length=200, blank=True)
-  imagem = models.ImageField(upload_to=posts_resolution_path)
+  imagem = models.ImageField(upload_to=posts_resolution_path, blank=True)
   criado = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
@@ -19,14 +17,14 @@ class Post(models.Model):
 
 class PontuacaoQuizz(models.Model):
   nome = models.CharField(max_length=100)
-  pontuacao = models.IntegerField(validators=[MinValueValidator(2)])
+  pontuacao = models.IntegerField(validators=[MinValueValidator(0)])
   criado = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
     return self.nome[:50]
 
 class Linguagem(models.Model):
-  nome = models.CharField(max_length=20)
+  nome = models.CharField(max_length=50)
 
   def __str__(self):
     return self.nome[:50]
@@ -38,13 +36,16 @@ class Professor(models.Model):
     return self.nome[:50]
 
 class Projeto(models.Model):
-  nome = models.CharField(max_length=20)
+  nome = models.CharField(max_length=100)
+  disciplina = models.CharField(max_length=100, blank=True)
+  ano_letivo = models.CharField(max_length=100, blank=True)
+  tecnologias = models.CharField(max_length=100, blank=True)
 
   def __str__(self):
     return self.nome[:50]
 
 class Cadeira(models.Model):
-  nome = models.CharField(max_length=20)
+  nome = models.CharField(max_length=50)
   ano = models.IntegerField()
   descricao = models.TextField()
   linguagens = models.ManyToManyField(Linguagem)

@@ -2,8 +2,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
 from matplotlib import pyplot as plt
-from .models import Post, PontuacaoQuizz
+from .models import Cadeira, Post, PontuacaoQuizz, Projeto
 from .forms import PostForm
+from django.shortcuts import redirect
 
 # Create your views here.
 from django.shortcuts import render
@@ -16,17 +17,23 @@ def home_page_view(request):
 
   return render(request, 'portfolio/home.html', context)
 
-def apresentacao_page_view(request):
-  return render(request, 'portfolio/apresentacao.html')
+def sobre_page_view(request):
+  return render(request, 'portfolio/sobre.html')
 
-def competencias_page_view(request):
-  return render(request, 'portfolio/competencias.html')
+def contacto_page_view(request):
+  return render(request, 'portfolio/contacto.html')
 
-def formacao_page_view(request):
-  return render(request, 'portfolio/formacao.html')
+def educacao_page_view(request):
+  context = {
+    'cadeiras': Cadeira.objects.all()
+  }
+  return render(request, 'portfolio/educacao.html', context)
 
 def projetos_page_view(request):
-  return render(request, 'portfolio/projetos.html')
+  context = {
+    'projetos': Projeto.objects.all()
+  }
+  return render(request, 'portfolio/projetos.html', context)
 
 def licenciatura_page_view(request):
   return render(request, 'portfolio/licenciatura.html')
@@ -43,29 +50,36 @@ def blog_page_view(request):
   return render(request, 'portfolio/blog.html', context)
 
 def web_page_view(request):
+  if request.method == 'POST':
+    nome = request.POST['nome']
+    pontos = pontuacao_quizz(request)
+    if PontuacaoQuizz.objects.filter(nome=nome).exists():
+      PontuacaoQuizz.objects.filter(nome=nome).update(pontuacao=pontos)
+    else:
+      query = PontuacaoQuizz(nome=nome, pontuacao=pontos)
+      query.save()
+    desenha_grafico_resultados()
+    return redirect(reverse('portfolio:web'))
+
   return render(request, 'portfolio/web.html')
 
-def quizz(request):
-  if request.method == 'POST':
-    n = request.POST['nome']
-    p = pontuacao_quizz(request)
-    r = PontuacaoQuizz(nome=n, pontuacao=p)
-    r.save()
-    desenha_grafico_resultados()
-
 def pontuacao_quizz(request):
+  pontos = 0
   if request.method == 'POST':
-    return 3
+    if request.POST['html'] == 'html1':
+      pontos += 15
+    if request.POST['image-tag'] == 'image-tag3':
+      pontos += 15
+    if request.POST['python'] == 'python2':
+      pontos += 15
+    return pontos
 
 def desenha_grafico_resultados():
-  pontuacoes = sorted(PontuacaoQuizz.objects.all(), key=lambda objeto:objeto.pontuacao, reverse=True)
-  nomes_x = []
-  pontuacao_y = []
-  for nome,pontuacao in pontuacoes:
-    nomes_x.append(nome)
-    pontuacao_y.append(pontuacao)
-  nomes_x.reverse()
-  pontuacao_y.reverse()
-  plt.barh(nomes_x, pontuacao_y)
-  plt.show()
-  plt.savefig('static/images/pontuacoes.png ', bbox_inches='tight')
+  query = sorted(PontuacaoQuizz.objects.all(),
+                  key=lambda x: x.pontuacao, reverse=True)
+  nomes = [objeto.nome for objeto in query]
+  pontuacoes = [objeto.pontuacao for objeto in query]
+  plt.barh(nomes, pontuacoes)
+  plt.savefig('portfolio/static/portfolio/images/pontuacoes.png',
+              bbox_inches='tight')
+  plt.close()

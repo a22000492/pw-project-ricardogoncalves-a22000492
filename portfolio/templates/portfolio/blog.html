@@ -1,18 +1,40 @@
 {% extends 'portfolio/layout.html' %}
 
 {% block main %}
-  {% for post in posts %}
-    <p> 
-      {{ post.titulo }}
-      {{ post.descricao }}
-    </p>
-  {% endfor %}
+  <section>
+    <div class="container content content-center">
+      <h1>Blog</h1>
+      <div class="posts">
+        {% for post in posts %}
+          <div class="post">
+            <h4>{{ post.titulo }}</h4>
+            <p>{{ post.descricao }}</p>
+            <div class="aditional-info">
+              <div>
+                {% if post.autor %}
+                  <p class="author">{{ post.autor }}</p>
+                {% endif %}
+              </div>
+              {% if post.link %}
+                <a href="{{ post.link }}" class="btn-primary">Ver mais</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
 
-  <h3>Novo post</h3>
-  <form action="{% url 'portfolio:blog' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Gravar" class="btn btn-success" >
-  </form>
+      <div class="posts-form">
+        <h3>Criar post</h3>
+        <form action="{% url 'portfolio:blog' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="submit-group">
+            <input type="submit" value="Gravar" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
+    
+    </div>
+  </section>
       
 {% endblock %}
