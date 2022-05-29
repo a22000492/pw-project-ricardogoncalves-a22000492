@@ -3,9 +3,30 @@
 {% extends 'portfolio/layout.html' %}
 
 {% block main %}
-  <h3>Portfolio</h3>
-  <p>{{ data }}</p>
-
-  {% load static %}
-  <img src="{% static 'portfolio/images/space.jpg' %}">
+{% load static %}
+  <section class="hero-bg" style="background-image: url('{% static 'portfolio/images/hero.jpg' %}');">
+    <div class="container content">
+      <div class="text-box white">
+        <h1>Ricardo Gonçalves - Portfolio</h1>
+        <p>Web Developer</p>
+        <p>Estudante em Engenharia Informática</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container content">
+      <div class="text-image">
+        <div class="text-box spaced black">
+          <h2>Apresentação</h2>
+          <p>Tenho 24 anos, sou estudante de Engenharia Informática e Web Developer.</p>
+          <p>Em 2015 terminei os meus estudos em Técnico de Equipamentos informáticos e em 2020 decidi prosseguir estudos na Universidade Lusófona de Humanidades e Tecnologias porque o curso de Engenharia Informática desta faculdade tem um foco maior em programação que é a área que mais me interessa.</p>
+          <p>Até agora as cadeiras que mais gostei foram Algoritmia e Estrutura de Dados, Linguagens da Programação I e Linguagens da Programação II porque aprofundaram os meus conhecimentos de programação.</p>
+        </div>
+        <div class="center">
+          {% load static %}
+          <img src="{% static 'portfolio/images/programming.jpg' %}" class="img-box">
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
