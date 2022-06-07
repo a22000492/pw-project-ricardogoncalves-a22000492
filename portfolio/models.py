@@ -55,3 +55,16 @@ class Cadeira(models.Model):
 
   def __str__(self):
     return self.nome[:50]
+
+class Tfc(models.Model):
+  autores = models.CharField(max_length=500)
+  ano = models.IntegerField()
+  titulo = models.CharField(max_length=100)
+  resumo = models.TextField()
+  imagem = models.ImageField(upload_to=posts_resolution_path, blank=True)
+  relatorio = models.CharField(max_length=100, blank=True)
+  github = models.CharField(max_length=100, blank=True)
+  video = models.CharField(max_length=100, blank=True)
+
+  def __str__(self):
+    return self.titulo[:100]

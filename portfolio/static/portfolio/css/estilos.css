@@ -123,13 +123,13 @@ footer > div:first-child {
   font-size: 12px;
 }
 
-.post .aditional-info {
+.post .aditional-info, .tfc .aditional-info {
   display: flex;
   width: 100%;
   padding-top: 3rem;
 }
 
-.post .aditional-info > div {
+.post .aditional-info > div, .tfc .aditional-info > div {
   flex: 1;
 }
 
@@ -146,7 +146,7 @@ a {
   text-decoration: none;
 }
 
-.projetos div, .posts > div {
+.projetos > div, .posts > div {
   display: flex;
   padding: 1rem;
   justify-content: center;
@@ -214,6 +214,38 @@ select, input[type=text], input[type=url], textarea {
 
 .contacts {
   padding: 2rem 1rem;
+}
+
+.detail .contacts {
+  padding-left: 0;
+}
+
+.content.detail {
+  align-items: flex-start;
+}
+
+.detail div {
+  padding-top: 2rem;
+}
+
+.detail p {
+  line-height: 1.5rem;
+}
+
+.result-container {
+  margin-top: 3rem;
+}
+
+.result-fields {
+  padding-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.facts-result {
+  padding-top: 1rem;
 }
 
 @media only screen and (max-width: 790px) {

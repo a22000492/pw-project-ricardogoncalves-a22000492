@@ -1,0 +1,25 @@
+{% extends 'portfolio/layout.html' %}
+
+{% block main %}
+<section>
+  <div class="container content content-center detail">
+    <h1>{{ tfc.titulo }}</h1>
+    <div>
+      <p><strong>Autores:</strong> {{ tfc.autores }}</p>
+      <p><strong>Ano:</strong> {{ tfc.ano }}</p>
+    </div>
+    <div>
+      <p>{{ tfc.resumo }}</p>
+    </div>
+    <div class="contacts">
+      {% if tfc.github %}
+        <a href="{{ tfc.github }}" class="btn-primary">Github</a>
+      {% endif %}
+
+      {% if tfc.video %}
+        <a href="{{ tfc.video }}" target="_blank" class="btn-primary">Video</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

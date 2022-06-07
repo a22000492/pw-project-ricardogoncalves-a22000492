@@ -7,6 +7,7 @@ from .models import Professor
 from .models import Linguagem
 from .models import Projeto
 from .models import PontuacaoQuizz
+from .models import Tfc
 
 admin.site.register(Post)
 admin.site.register(Cadeira)
@@ -14,3 +15,4 @@ admin.site.register(Professor)
 admin.site.register(Linguagem)
 admin.site.register(Projeto)
 admin.site.register(PontuacaoQuizz)
+admin.site.register(Tfc)

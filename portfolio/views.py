@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
 from matplotlib import pyplot as plt
-from .models import Cadeira, Post, PontuacaoQuizz, Projeto
+from .models import Cadeira, Post, PontuacaoQuizz, Projeto, Tfc
 from .forms import PostForm
 from django.shortcuts import redirect
 
@@ -31,7 +31,8 @@ def educacao_page_view(request):
 
 def projetos_page_view(request):
   context = {
-    'projetos': Projeto.objects.all()
+    'projetos': Projeto.objects.all(),
+    'tfcs': Tfc.objects.all()
   }
   return render(request, 'portfolio/projetos.html', context)
 
@@ -83,3 +84,12 @@ def desenha_grafico_resultados():
   plt.savefig('portfolio/static/portfolio/images/pontuacoes.png',
               bbox_inches='tight')
   plt.close()
+
+def tfc_detail_page_view(request, pk):
+  context = {
+    'tfc': Tfc.objects.get(pk=pk)
+  }
+  return render(request, 'portfolio/tfc_detail.html', context)
+
+def apis_page_view(request):
+  return render(request, 'portfolio/apis.html')
