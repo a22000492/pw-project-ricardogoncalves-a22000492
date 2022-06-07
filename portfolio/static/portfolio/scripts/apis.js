@@ -28,7 +28,7 @@ const APIS = {
   },
   getWeather: function(city) {
     const _this = this;
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city.join('+')}&APPID=258938c7d111aa6cb8df7dfb9aef19c0`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city.join('+')}&APPID=258938c7d111aa6cb8df7dfb9aef19c0`)
       .then(res => res.json())
       .then(wttInfo => {
         try {
