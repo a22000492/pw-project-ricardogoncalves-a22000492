@@ -1,7 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
+
 from matplotlib import pyplot as plt
+import io
+import urllib, base64
+import matplotlib
+matplotlib.use('Agg')
+
 from .models import Cadeira, Post, PontuacaoQuizz, Projeto, Tfc
 from .forms import PostForm
 from django.shortcuts import redirect
@@ -59,10 +65,14 @@ def web_page_view(request):
     else:
       query = PontuacaoQuizz(nome=nome, pontuacao=pontos)
       query.save()
-    desenha_grafico_resultados()
+
     return redirect(reverse('portfolio:web'))
 
-  return render(request, 'portfolio/web.html')
+  context = {
+    'data': desenha_grafico_resultados()
+  }
+
+  return render(request, 'portfolio/web.html', context)
 
 def pontuacao_quizz(request):
   pontos = 0
@@ -81,9 +91,21 @@ def desenha_grafico_resultados():
   nomes = [objeto.nome for objeto in query]
   pontuacoes = [objeto.pontuacao for objeto in query]
   plt.barh(nomes, pontuacoes)
-  plt.savefig('portfolio/static/portfolio/images/pontuacoes.png',
-              bbox_inches='tight')
+  plt.ylabel("Prioridade")
+  plt.autoscale()
+
+  fig = plt.gcf()
   plt.close()
+
+  buf = io.BytesIO()
+  fig.savefig(buf, format='png')
+
+
+  buf.seek(0)
+  string = base64.b64encode(buf.read())
+  uri = urllib.parse.quote(string)
+
+  return uri
 
 def tfc_detail_page_view(request, pk):
   context = {
