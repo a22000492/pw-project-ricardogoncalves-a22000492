@@ -12,8 +12,39 @@ from .models import Cadeira, Post, PontuacaoQuizz, Projeto, Tfc
 from .forms import PostForm
 from django.shortcuts import redirect
 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 from django.shortcuts import render
+
+def view_login(request):
+
+  if request.method == 'POST':
+    username = request.POST['username']
+    password = request.POST['password']
+
+    user = authenticate(
+      request,
+      username=username,
+      password=password)
+
+    if user is not None:
+      login(request, user)
+      return HttpResponseRedirect(reverse('portfolio:home'))
+    else:
+        return render(request, 'portfolio/login.html', {
+            'message': 'Credenciais invalidas.'
+        })
+
+  return render(request, 'portfolio/login.html')
+
+def view_logout(request):
+  logout(request)
+
+  return render(request, 'portfolio/login.html', {
+      'message': 'Foi desconetado.'
+  })
 
 def home_page_view(request):
   agora = datetime.now()
@@ -56,7 +87,7 @@ def blog_page_view(request):
   }
   return render(request, 'portfolio/blog.html', context)
 
-def web_page_view(request):
+def quizz_page_view(request):
   if request.method == 'POST':
     nome = request.POST['nome']
     pontos = pontuacao_quizz(request)
@@ -66,13 +97,13 @@ def web_page_view(request):
       query = PontuacaoQuizz(nome=nome, pontuacao=pontos)
       query.save()
 
-    return redirect(reverse('portfolio:web'))
+    return redirect(reverse('portfolio:quizz'))
 
   context = {
     'data': desenha_grafico_resultados()
   }
 
-  return render(request, 'portfolio/web.html', context)
+  return render(request, 'portfolio/quizz.html', context)
 
 def pontuacao_quizz(request):
   pontos = 0

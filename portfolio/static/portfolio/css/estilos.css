@@ -176,7 +176,7 @@ label {
   padding-bottom: 0.5rem;
 }
 
-select, input[type=text], input[type=url], textarea {
+select, input[type=text], input[type=password], input[type=url], textarea {
   width: 100%;
   padding: 5px 8px;
 }
@@ -246,6 +246,10 @@ select, input[type=text], input[type=url], textarea {
 
 .facts-result {
   padding-top: 1rem;
+}
+
+.login-form input {
+  margin: .5rem 0;
 }
 
 @media only screen and (max-width: 790px) {
