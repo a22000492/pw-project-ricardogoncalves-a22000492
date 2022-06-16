@@ -5,28 +5,28 @@
 {% block main %}
   <section>
     <div class="container">
-      <h1>Licenciatura em Engenharia Informática</h1>
+      <h1>Educação</h1>
       <div class="posts">
-        {% for cadeira in cadeiras %}
-          <div class="post">
-            <h4>{{ cadeira.nome }}</h4>
-            <p>{{ cadeira.descricao }}</p>
-            <p><strong>Ano:</strong> {{ cadeira.ano }}</p>
-            {% if cadeira.linguagens %}
-              <p><strong>Linguagens:</strong>
-                {% for linguagem in cadeira.linguagens.all %}
-                  {{ linguagem.nome }}
-                {% endfor %}
-              </p>
-            {% endif %}
-            <p><strong>Professor Teóricas:</strong> {{ cadeira.docente_teorica }}</p>
-            <p><strong>Professores de Práticas:</strong> 
-              {% for docente in cadeira.docentes_praticas.all %}
-                  {{ docente.nome }}
-                {% endfor %}
-            </p>
+        <div class="post">
+          <h4>Licenciatura em Engenharia Informática</h4>
+          <p>Universidade Lusófona de Humanidades e Tecnologias</p>
+          <p><strong>Anos:</strong> 2020-2023</p>
+          <div class="aditional-info">
+            <div>
+            </div>
+            <a href="{% url 'portfolio:licenciatura' %}" class="btn-primary">Ver mais</a>
           </div>
-        {% endfor %}
+        </div>
+        <div class="post">
+          <h4>Técnico de Gestão de Equipamentos Informáticos</h4>
+          <p>Escola Técnica e Profissional de Mafra</p>
+          <p><strong>Anos:</strong> 2012-2015</p>
+          <div class="aditional-info">
+            <div>
+            </div>
+            <a href="https://www.etpm.pt/tecnicodegestaodeequipamentosinformaticos" target="_blank" class="btn-primary">Ver mais</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>

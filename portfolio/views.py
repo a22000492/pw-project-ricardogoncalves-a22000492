@@ -9,7 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 
 from .models import Cadeira, Post, PontuacaoQuizz, Projeto, Tfc, Noticia, Laboratorio
-from .forms import PostForm, ProjetoForm
+from .forms import PostForm, ProjetoForm, CadeiraForm
 from django.shortcuts import redirect
 
 from django.contrib.auth import authenticate, login, logout
@@ -61,10 +61,13 @@ def contacto_page_view(request):
   return render(request, 'portfolio/contacto.html')
 
 def educacao_page_view(request):
+  return render(request, 'portfolio/educacao.html')
+
+def licenciatura_page_view(request):
   context = {
     'cadeiras': Cadeira.objects.all()
   }
-  return render(request, 'portfolio/educacao.html', context)
+  return render(request, 'portfolio/licenciatura.html', context)
 
 def projetos_page_view(request):
   context = {
@@ -72,9 +75,6 @@ def projetos_page_view(request):
     'tfcs': Tfc.objects.all()
   }
   return render(request, 'portfolio/projetos.html', context)
-
-def licenciatura_page_view(request):
-  return render(request, 'portfolio/licenciatura.html')
 
 def blog_page_view(request):
   form = PostForm(request.POST or None)
@@ -174,6 +174,20 @@ def novo_projeto_page_view(request):
   context = {'form': form}
   return render(request, 'portfolio/novo_projeto.html', context)
 
+def nova_cadeira_page_view(request):
+
+  if not request.user.is_authenticated:
+    return HttpResponseRedirect(reverse('portfolio:login'))
+
+  form = CadeiraForm(request.POST or None)
+
+  if form.is_valid():
+    form.save()
+    return HttpResponseRedirect(reverse('portfolio:licenciatura'))
+
+  context = {'form': form}
+  return render(request, 'portfolio/nova_cadeira.html', context)
+
 @login_required
 def editar_projeto_page_view(request, projeto_id):
 
@@ -186,3 +200,15 @@ def editar_projeto_page_view(request, projeto_id):
 
     context = {'form': form, 'projeto_id': projeto_id}
     return render(request, 'portfolio/editar_projeto.html', context)
+
+def editar_cadeira_page_view(request, cadeira_id):
+
+    cadeira = Cadeira.objects.get(id=cadeira_id)
+    form = CadeiraForm(request.POST or None, instance=cadeira)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('portfolio:licenciatura'))
+
+    context = {'form': form, 'cadeira_id': cadeira_id}
+    return render(request, 'portfolio/editar_cadeira.html', context)

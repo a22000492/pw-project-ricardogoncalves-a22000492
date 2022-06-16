@@ -1,21 +1,45 @@
 {% extends 'portfolio/layout.html' %}
 
 {% block main %}
-  <h3>Licenciatura</h3>
-  <h4>1º Ano</h4>
-  <h5>1º Semestre</h5>
-  <ul>
-    <li>Fundamentos da Programação</li>
-    <li>Sistemas Digitais</li>
-    <li>Matemática I</li>
-  </ul>
-  <h5>2º Semestre</h5>
-
-  <h4>2º Ano</h4>
-  <h5>1º Semestre</h5>
-  <h5>2º Semestre</h5>
-
-  <h4>3º Ano</h4>
-  <h5>1º Semestre</h5>
-  <h5>2º Semestre</h5>
+  <section>
+    <div class="container">
+      <h1>Licenciatura em Engenharia Informática</h1>
+      {% if request.user.is_authenticated %}
+        <div>
+          <a href="{% url 'portfolio:nova_cadeira' %}" class="btn-primary">Nova Cadeira</a>
+        </div>
+      {% endif %}
+      <div class="posts">
+        {% for cadeira in cadeiras %}
+          <div class="post">
+            <h4>{{ cadeira.nome }}</h4>
+            <p>{{ cadeira.descricao }}</p>
+            <p><strong>Ano:</strong> {{ cadeira.ano }}</p>
+            {% if cadeira.linguagens %}
+              <p><strong>Linguagens:</strong>
+                {% for linguagem in cadeira.linguagens.all %}
+                  {{ linguagem.nome }}
+                {% endfor %}
+              </p>
+            {% endif %}
+            <p><strong>Professor Teóricas:</strong> {{ cadeira.docente_teorica }}</p>
+            <p><strong>Professores de Práticas:</strong> 
+              {% for docente in cadeira.docentes_praticas.all %}
+                  {{ docente.nome }}
+                {% endfor %}
+            </p>
+            {% if request.user.is_authenticated %}
+              <div class="aditional-info">
+                <div>
+                </div>
+                <div>
+                  <a href="{% url 'portfolio:editar_cadeira' cadeira.id %}" class="btn-primary">Editar</a>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
 {% endblock %}

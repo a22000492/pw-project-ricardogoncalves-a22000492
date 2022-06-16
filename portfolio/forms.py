@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Post, Projeto
+from .models import Post, Projeto, Cadeira
 
 
 class PostForm(ModelForm):
@@ -42,5 +42,16 @@ class ProjetoForm(ModelForm):
       'tecnologias': 'Tecnologias'
     }
 
+    help_texts = {
+    }
+
+class CadeiraForm(ModelForm):
+  class Meta:
+    model = Cadeira
+    fields = '__all__'
+    widgets = {
+    }
+    labels = {
+    }
     help_texts = {
     }
