@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Post
+from .models import Post, Projeto
 
 
 class PostForm(ModelForm):
@@ -20,6 +20,26 @@ class PostForm(ModelForm):
       'descricao': 'Texto',
       'link': 'Link',
       'imagem': 'Imagem'
+    }
+
+    help_texts = {
+    }
+
+class ProjetoForm(ModelForm):
+  class Meta:
+    model = Projeto
+    fields = '__all__'
+    widgets = {
+      'nome': forms.TextInput(),
+      'disciplina': forms.TextInput(),
+      'ano_letivo': forms.TextInput(),
+      'tecnologias': forms.TextInput(),
+    }
+    labels = {
+      'nome': 'Nome',
+      'disciplina': 'Disciplina',
+      'ano_letivo': 'Ano Letivo',
+      'tecnologias': 'Tecnologias'
     }
 
     help_texts = {

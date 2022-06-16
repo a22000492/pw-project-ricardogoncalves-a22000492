@@ -6,13 +6,27 @@
   <section>
     <div class="container content content-center">
       <h1>Projetos</h1>
+      {% if request.user.is_authenticated %}
+        <div>
+          <a href="{% url 'portfolio:novo_projeto' %}" class="btn-primary">Novo Projeto</a>
+        </div>
+      {% endif %}
       <div class="projetos">
         {% for projeto in projetos %}
-          <div>
+          <div class="tfc">
             <h4>{{ projeto.nome }}</h4>
             <p>{{ projeto.disciplina }}</p>
             <p><strong>Ano letivo:</strong> {{ projeto.ano_letivo }}</p>
             <p><strong>Tecnologias:</strong> {{ projeto.tecnologias }}</p>
+            {% if request.user.is_authenticated %}
+              <div class="aditional-info">
+                <div>
+                </div>
+                <div>
+                  <a href="{% url 'portfolio:editar_projeto' projeto.id %}" class="btn-primary">Editar</a>
+                </div>
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>

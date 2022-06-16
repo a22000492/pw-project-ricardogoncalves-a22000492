@@ -9,7 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 
 from .models import Cadeira, Post, PontuacaoQuizz, Projeto, Tfc, Noticia
-from .forms import PostForm
+from .forms import PostForm, ProjetoForm
 from django.shortcuts import redirect
 
 from django.contrib.auth import authenticate, login, logout
@@ -152,3 +152,31 @@ def tfc_detail_page_view(request, pk):
 
 def apis_page_view(request):
   return render(request, 'portfolio/apis.html')
+
+
+def novo_projeto_page_view(request):
+
+  if not request.user.is_authenticated:
+    return HttpResponseRedirect(reverse('portfolio:login'))
+
+  form = ProjetoForm(request.POST or None)
+
+  if form.is_valid():
+    form.save()
+    return HttpResponseRedirect(reverse('portfolio:projetos'))
+
+  context = {'form': form}
+  return render(request, 'portfolio/novo_projeto.html', context)
+
+@login_required
+def editar_projeto_page_view(request, projeto_id):
+
+    projeto = Projeto.objects.get(id=projeto_id)
+    form = ProjetoForm(request.POST or None, instance=projeto)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('portfolio:projetos'))
+
+    context = {'form': form, 'projeto_id': projeto_id}
+    return render(request, 'portfolio/editar_projeto.html', context)
