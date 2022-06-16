@@ -1,0 +1,25 @@
+{% extends 'portfolio/layout.html' %}
+
+{% block main %}
+  <section>
+    <div class="container content content-center">
+      <h1>Notícias</h1>
+      <div class="posts">
+        {% for noticia in noticias %}
+          <div class="noticia">
+            <h4>{{ noticia.titulo }}</h4>
+            <p>{{ noticia.descricao }}</p>
+            <div class="aditional-info">
+              <div>
+              </div>
+              {% if noticia.link %}
+                <a href="{{ noticia.link }}" class="btn-primary">Ver mais</a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+      
+{% endblock %}

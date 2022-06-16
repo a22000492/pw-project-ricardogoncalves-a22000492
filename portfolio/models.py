@@ -68,3 +68,11 @@ class Tfc(models.Model):
 
   def __str__(self):
     return self.titulo[:100]
+
+class Noticia(models.Model):
+  titulo = models.CharField(max_length=100)
+  descricao = models.TextField(max_length=100, blank=True)
+  link = models.URLField(max_length=100, blank=True)
+
+  def __str__(self):
+    return self.titulo[:50]

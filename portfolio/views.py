@@ -8,7 +8,7 @@ import urllib, base64
 import matplotlib
 matplotlib.use('Agg')
 
-from .models import Cadeira, Post, PontuacaoQuizz, Projeto, Tfc
+from .models import Cadeira, Post, PontuacaoQuizz, Projeto, Tfc, Noticia
 from .forms import PostForm
 from django.shortcuts import redirect
 
@@ -86,6 +86,12 @@ def blog_page_view(request):
       'form': form
   }
   return render(request, 'portfolio/blog.html', context)
+
+def noticias_page_view(request):
+  context = {
+      'noticias': Noticia.objects.all()
+  }
+  return render(request, 'portfolio/noticias.html', context)
 
 def quizz_page_view(request):
   if request.method == 'POST':

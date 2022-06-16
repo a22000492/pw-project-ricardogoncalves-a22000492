@@ -13,6 +13,7 @@ urlpatterns = [
     path('tfc/<int:pk>', views.tfc_detail_page_view, name='tfc_detail'),
     path('licenciatura', views.licenciatura_page_view, name='licenciatura'),
     path('blog', views.blog_page_view, name='blog'),
+    path('noticias', views.noticias_page_view, name='noticias'),
     path('quizz', views.quizz_page_view, name='quizz'),
     path('login/', views.view_login, name='login'),
     path('logout/', views.view_logout, name='logout')
