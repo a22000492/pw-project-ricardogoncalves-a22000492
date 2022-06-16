@@ -76,3 +76,11 @@ class Noticia(models.Model):
 
   def __str__(self):
     return self.titulo[:50]
+
+class Laboratorio(models.Model):
+  titulo = models.CharField(max_length=150)
+  descricao = models.TextField(max_length=100, blank=True)
+  link = models.URLField(max_length=100, blank=True)
+
+  def __str__(self):
+    return self.titulo[:50]
